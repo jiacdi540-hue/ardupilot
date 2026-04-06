@@ -1,0 +1,54 @@
+name: Build URMOUKY_H743 Copter
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'libraries/AP_HAL_ChibiOS/hwdef/URMOUKY_H743/**'
+      - 'Tools/AP_Bootloader/board_types.txt'
+  pull_request:
+    paths:
+      - 'libraries/AP_HAL_ChibiOS/hwdef/URMOUKY_H743/**'
+      - 'Tools/AP_Bootloader/board_types.txt'
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{github.workflow}}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    container: ardupilot/ardupilot-dev-chibios:v0.1.3
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: 'recursive'
+
+      - name: Configure for URMOUKY_H743
+        run: |
+          ./waf configure --board URMOUKY_H743
+
+      - name: Build Copter
+        run: |
+          ./waf copter
+
+      - name: Generate HEX file
+        run: |
+          arm-none-eabi-objcopy -O ihex build/URMOUKY_H743/bin/arducopter build/URMOUKY_H743/bin/arducopter.hex
+
+      - name: Upload firmware artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: URMOUKY_H743_copter
+          path: build/URMOUKY_H743/bin/arducopter.hex
+          retention-days: 90
+
+      - name: Upload bin artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: URMOUKY_H743_copter_bin
+          path: build/URMOUKY_H743/bin/arducopter.bin
+          retention-days: 90
