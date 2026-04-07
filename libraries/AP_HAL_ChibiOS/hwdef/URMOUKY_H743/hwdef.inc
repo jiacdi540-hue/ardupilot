@@ -1,0 +1,110 @@
+# hw definition file for processing by chibios_pins.py
+# for URMOUKY H743 (Drone H7 Flight Controller)
+
+# MCU class and specific type
+MCU STM32H7xx STM32H743xx
+
+# crystal frequency, setup to use external oscillator
+OSCILLATOR_HZ 8000000
+
+FLASH_SIZE_KB 2048
+
+# bootloader takes first sector
+FLASH_RESERVE_START_KB 384
+
+# ChibiOS system timer
+STM32_ST_USE_TIMER 5
+define CH_CFG_ST_RESOLUTION 32
+
+define HAL_STORAGE_SIZE 15360
+
+# use last 4 pages for flash storage
+STORAGE_FLASH_PAGE 252
+
+# use double page size for flash storage
+define AP_FLASH_STORAGE_DOUBLE_PAGE 1
+# # # # # # # # # # # # # # # # # # # # # #
+
+# USB
+PA11 OTG_HS_DM OTG1
+PA12 OTG_HS_DP OTG1
+
+# SPI1 - Primary Gyro (MPU6500/6000)
+PA5 SPI1_SCK SPI1
+PA6 SPI1_MISO SPI1
+PA7 SPI1_MOSI SPI1
+
+# SPI2 - OSD (MAX7456) / Dataflash
+PB13 SPI2_SCK SPI2
+PB14 SPI2_MISO SPI2
+PB15 SPI2_MOSI SPI2
+
+# SPI3 - Secondary Gyro
+PB3 SPI3_SCK SPI3
+PB4 SPI3_MISO SPI3
+PB5 SPI3_MOSI SPI3
+
+# CS pins
+C15 SP1_CS1 CS
+E11 SP3_CS1 CS
+B12 MAX7456_CS CS
+D04 FLASH_CS CS
+
+# Beeper
+PA15 BUZZER OUTPUT GPIO(80) LOW
+define HAL_BUZZER_PIN 80
+
+# LEDs
+PE3 LED1 OUTPUT LOW GPIO(89)
+PE4 LED2 OUTPUT LOW GPIO(90)
+define HAL_BRIGHT_LED_PINS 89
+define AP_NOTIFY_GPIO_LED_GREEN_PIN 89
+define AP_NOTIFY_GPIO_LED_RED_PIN 90
+
+# order of UARTs (and USB)
+SERIAL_ORDER OTG1 USART1 USART2 USART3 USART4 USART6
+
+# UARTs
+# USART1 - GPS
+PA9 TX USART1
+PA10 RX USART1
+
+# USART2 - RC Input (ELRS)
+PA2 TX USART2
+PA3 RX USART2
+
+# USART3 - Serial Telemetry
+PC4 TX USART3
+PC5 RX USART3
+
+# USART4 - UART
+PA0 TX USART4
+PA1 RX USART4
+
+# USART6 - BT/External
+PC6 TX USART6
+PC7 RX USART6
+
+# I2C
+# I2C1 - Baro
+PB6 I2C1_SCL I2C1
+PB7 I2C1_SDA I2C1
+
+# ADC
+# Voltage sensor
+PC0 ADC1_GPIO1 ADC1_1
+# Current sensor  
+PC1 ADC1_GPIO2 ADC1_2
+# RSSI
+PC5 ADC1_GPIO3 ADC1_3
+
+# PWM outputs - 4 motor outputs
+# Motors 1-4 on B00, B01, A00, A01
+B00 TIM3_CH3 TIM3_UP
+B01 TIM3_CH4 TIM3_UP
+A00 TIM2_CH1 TIM2_UP
+A01 TIM2_CH2 TIM2_UP
+
+# PWM inputs
+# RC Input on USART2 (ELRS)
+
