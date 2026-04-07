@@ -19,10 +19,9 @@ define CH_CFG_ST_RESOLUTION 32
 define HAL_STORAGE_SIZE 15360
 
 # use last 4 pages for flash storage
-STORAGE_FLASH_PAGE 252
+STORAGE_FLASH_PAGE 1
 
 # use double page size for flash storage
-define AP_FLASH_STORAGE_DOUBLE_PAGE 1
 # # # # # # # # # # # # # # # # # # # # #
 
 # USB
