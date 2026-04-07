@@ -137,9 +137,9 @@ define AP_NOTIFY_GPIO_LED_RED_PIN 90
 E04 LED1 OUTPUT LOW GPIO(91)
 define AP_NOTIFY_GPIO_LED_GREEN_PIN 91
 
-# Dataflash setup - SPI2 external flash
-SPIDEV dataflash SPI2 DEVID1 FLASH_CS MODE3 104*MHZ 104*MHZ
-DATAFLASH littlefs:w25nxx
+# Dataflash setup - SPI2 external flash (temporarily disabled for testing)
+#SPIDEV dataflash SPI2 DEVID1 FLASH_CS MODE3 104*MHZ 104*MHZ
+#DATAFLASH littlefs:w25nxx
 
 # Baro
 BARO DPS310 I2C:0:0x76
