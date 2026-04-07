@@ -26,8 +26,8 @@ define AP_FLASH_STORAGE_DOUBLE_PAGE 1
 # # # # # # # # # # # # # # # # # # # # # #
 
 # USB
-PA11 OTG_HS_DM OTG1
-PA12 OTG_HS_DP OTG1
+PA11 OTG_FS_DM OTG1
+PA12 OTG_FS_DP OTG1
 
 # SPI1 - Primary Gyro (MPU6500/6000)
 PA5 SPI1_SCK SPI1
